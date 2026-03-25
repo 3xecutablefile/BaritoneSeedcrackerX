@@ -47,15 +47,15 @@ public class MonumentFinder extends Finder {
     public static List<Finder> create(Level world, ChunkPos chunkPos) {
         List<Finder> finders = new ArrayList<>();
         finders.add(new MonumentFinder(world, chunkPos));
-        finders.add(new MonumentFinder(world, new ChunkPos(chunkPos.x - 1, chunkPos.z)));
-        finders.add(new MonumentFinder(world, new ChunkPos(chunkPos.x, chunkPos.z - 1)));
-        finders.add(new MonumentFinder(world, new ChunkPos(chunkPos.x - 1, chunkPos.z - 1)));
+        finders.add(new MonumentFinder(world, new ChunkPos(chunkPos.x() - 1, chunkPos.z())));
+        finders.add(new MonumentFinder(world, new ChunkPos(chunkPos.x(), chunkPos.z() - 1)));
+        finders.add(new MonumentFinder(world, new ChunkPos(chunkPos.x() - 1, chunkPos.z() - 1)));
         return finders;
     }
 
     @Override
     public List<BlockPos> findInChunk() {
-        Biome biome = this.world.getNoiseBiome((this.chunkPos.x << 2) + 2, 64, (this.chunkPos.z << 2) + 2).value();
+        Biome biome = this.world.getNoiseBiome((this.chunkPos.x() << 2) + 2, 64, (this.chunkPos.z() << 2) + 2).value();
         if (BiomeFixer.swap(biome).getCategory() != com.seedfinding.mcbiome.biome.Biome.Category.OCEAN) return new ArrayList<>();
         Map<PieceFinder, List<BlockPos>> result = this.findInChunkPieces();
         List<BlockPos> combinedResult = new ArrayList<>();
@@ -69,8 +69,8 @@ public class MonumentFinder extends Finder {
             combinedResult.addAll(positions);
 
             positions.forEach(pos -> {
-                ChunkPos monumentStart = new ChunkPos(this.chunkPos.x + 1, this.chunkPos.z + 1);
-                RegionStructure.Data<?> data = Features.MONUMENT.at(monumentStart.x, monumentStart.z);
+                ChunkPos monumentStart = new ChunkPos(this.chunkPos.x() + 1, this.chunkPos.z() + 1);
+                RegionStructure.Data<?> data = Features.MONUMENT.at(monumentStart.x(), monumentStart.z());
 
                 if (SeedCracker.get().getDataStorage().addBaseData(data, DataAddedEvent.POKE_STRUCTURES)) {
                     this.cuboids.add(new Cuboid(pos, pieceFinder.getLayout(), ARGB.color(0, 0, 255)));

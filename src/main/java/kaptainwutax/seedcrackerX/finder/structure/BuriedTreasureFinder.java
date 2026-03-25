@@ -66,7 +66,7 @@ public class BuriedTreasureFinder extends BlockFinder {
     @Override
     public List<BlockPos> findInChunk() {
 
-        Biome biome = this.world.getNoiseBiome((this.chunkPos.x << 2) + 2, 64, (this.chunkPos.z << 2) + 2).value();
+        Biome biome = this.world.getNoiseBiome((this.chunkPos.x() << 2) + 2, 64, (this.chunkPos.z() << 2) + 2).value();
         if (!Features.BURIED_TREASURE.isValidBiome(BiomeFixer.swap(biome))) return new ArrayList<>();
 
         List<BlockPos> result = super.findInChunk();
@@ -80,7 +80,7 @@ public class BuriedTreasureFinder extends BlockFinder {
         });
 
         result.forEach(pos -> {
-            RegionStructure.Data<?> data = Features.BURIED_TREASURE.at(this.chunkPos.x, this.chunkPos.z);
+            RegionStructure.Data<?> data = Features.BURIED_TREASURE.at(this.chunkPos.x(), this.chunkPos.z());
 
             if (SeedCracker.get().getDataStorage().addBaseData(data, DataAddedEvent.POKE_STRUCTURES)) {
                 this.cuboids.add(new Cuboid(pos, ARGB.color(255, 255, 0)));

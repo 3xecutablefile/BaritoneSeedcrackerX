@@ -46,8 +46,8 @@ public class DungeonFinder extends BlockFinder {
     public static List<Finder> create(Level world, ChunkPos chunkPos) {
         List<Finder> finders = new ArrayList<>();
 
-        for (int chunkX = chunkPos.x - 1; chunkX <= chunkPos.x + 1; chunkX++) {
-            for (int chunkZ = chunkPos.z - 1; chunkZ <= chunkPos.z + 1; chunkZ++) {
+        for (int chunkX = chunkPos.x() - 1; chunkX <= chunkPos.x() + 1; chunkX++) {
+            for (int chunkZ = chunkPos.z() - 1; chunkZ <= chunkPos.z() + 1; chunkZ++) {
                 if (surroundingChunksLoaded(chunkX, chunkZ, world)) {
                     finders.add(new DungeonFinder(world, new ChunkPos(chunkX, chunkZ)));
                 }
@@ -114,7 +114,7 @@ public class DungeonFinder extends BlockFinder {
         });
 
         if (result.size() != 1) return new ArrayList<>();
-        Biome biome = this.world.getNoiseBiome((this.chunkPos.x << 2) + 2, 0, (this.chunkPos.z << 2) + 2).value();
+        Biome biome = this.world.getNoiseBiome((this.chunkPos.x() << 2) + 2, 0, (this.chunkPos.z() << 2) + 2).value();
 
         BlockPos pos = result.get(0);
         if (Config.get().getVersion().isNewerThan(MCVersion.v1_17_1)) {

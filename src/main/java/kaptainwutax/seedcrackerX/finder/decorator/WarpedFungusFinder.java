@@ -39,23 +39,23 @@ public class WarpedFungusFinder extends BlockFinder {
         List<Finder> finders = new ArrayList<>();
         finders.add(new WarpedFungusFinder(world, chunkPos));
 
-        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x - 1, chunkPos.z)));
-        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x, chunkPos.z - 1)));
-        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x - 1, chunkPos.z - 1)));
+        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x() - 1, chunkPos.z())));
+        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x(), chunkPos.z() - 1)));
+        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x() - 1, chunkPos.z() - 1)));
 
-        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x + 1, chunkPos.z)));
-        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x, chunkPos.z + 1)));
-        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x + 1, chunkPos.z + 1)));
+        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x() + 1, chunkPos.z())));
+        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x(), chunkPos.z() + 1)));
+        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x() + 1, chunkPos.z() + 1)));
 
-        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x + 1, chunkPos.z - 1)));
-        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x - 1, chunkPos.z + 1)));
+        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x() + 1, chunkPos.z() - 1)));
+        finders.add(new WarpedFungusFinder(world, new ChunkPos(chunkPos.x() - 1, chunkPos.z() + 1)));
 
         return finders;
     }
 
     @Override
     public List<BlockPos> findInChunk() {
-        Biome biome = this.world.getNoiseBiome((this.chunkPos.x << 2) + 2, 64, (this.chunkPos.z << 2) + 2).value();
+        Biome biome = this.world.getNoiseBiome((this.chunkPos.x() << 2) + 2, 64, (this.chunkPos.z() << 2) + 2).value();
         List<BlockPos> newResult = new ArrayList<>();
 
         if (!Features.WARPED_FUNGUS.isValidBiome(BiomeFixer.swap(biome))) return new ArrayList<>();

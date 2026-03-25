@@ -15,20 +15,13 @@ import java.util.regex.Pattern;
 public class Log {
 
     public static void debug(String message) {
-        Player player = getPlayer();
-
-        if (player != null) {
-            schedule(() -> player.displayClientMessage(Component.literal(message), false));
-        }
+        sendMessage(Component.literal(message));
     }
 
     public static void warn(String translateKey, Object... args) {
         String message = translate(translateKey).formatted(args);
-        Player player = getPlayer();
 
-        if (player != null) {
-            schedule(() -> player.displayClientMessage(Component.literal(message).withStyle(ChatFormatting.GREEN), false));
-        }
+        sendMessage(Component.literal(message).withStyle(ChatFormatting.GREEN));
     }
 
     public static void warn(String translateKey) {
@@ -37,11 +30,8 @@ public class Log {
 
     public static void error(String translateKey) {
         String message = translate(translateKey);
-        Player player = getPlayer();
 
-        if (player != null) {
-            schedule(() -> player.displayClientMessage(Component.literal(message).withStyle(ChatFormatting.RED), false));
-        }
+        sendMessage(Component.literal(message).withStyle(ChatFormatting.RED));
     }
 
     public static void printSeed(String translateKey, long seedValue) {
@@ -50,25 +40,18 @@ public class Log {
         String seed = String.valueOf(seedValue);
         Component text = ComponentUtils.wrapInSquareBrackets((Component.literal(seed)).withStyle(style -> style.withColor(ChatFormatting.GREEN).withClickEvent(new ClickEvent.CopyToClipboard(seed)).withHoverEvent(new HoverEvent.ShowText(Component.translatable("chat.copy.click"))).withInsertion(seed)));
 
-        Player player = getPlayer();
 
-        if (player != null) {
-            MutableComponent text1 = Component.literal(data[0]).append(text);
-            if (data.length > 1) {
-                text1.append(Component.literal(data[1]));
-            }
-            schedule(() -> player.displayClientMessage(text1, false));
+        MutableComponent text1 = Component.literal(data[0]).append(text);
+        if (data.length > 1) {
+            text1.append(Component.literal(data[1]));
         }
+        sendMessage(text1);
     }
 
     public static void printDungeonInfo(String message) {
         Component text = ComponentUtils.wrapInSquareBrackets((Component.literal(message)).withStyle(style -> style.withColor(ChatFormatting.GREEN).withClickEvent(new ClickEvent.CopyToClipboard(message)).withHoverEvent(new HoverEvent.ShowText( Component.translatable("chat.copy.click"))).withInsertion(message)));
 
-        Player player = getPlayer();
-
-        if (player != null) {
-            schedule(() -> player.displayClientMessage(text, false));
-        }
+        sendMessage(text);
     }
 
     public static String translate(String translateKey) {
@@ -79,8 +62,8 @@ public class Log {
         Minecraft.getInstance().execute(runnable);
     }
 
-    private static Player getPlayer() {
-        return Minecraft.getInstance().player;
+    private static void sendMessage(Component component) {
+        schedule(() -> Minecraft.getInstance().getChatListener().handleSystemMessage(component, false));
     }
 
 }

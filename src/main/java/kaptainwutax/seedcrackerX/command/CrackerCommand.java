@@ -6,7 +6,7 @@ import kaptainwutax.seedcrackerX.util.Log;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.ChatFormatting;
 
-import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.*;
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommands.*;
 
 public class CrackerCommand extends ClientCommand {
 
@@ -30,9 +30,9 @@ public class CrackerCommand extends ClientCommand {
     private void feedback(boolean success, boolean flag) {
         String action = Log.translate(flag ? "cracker.enabled" : "cracker.disabled");
         if (success) {
-            sendFeedback(Log.translate("cracker.successfully") + action, ChatFormatting.GREEN, false);
+            sendFeedback(Log.translate("cracker.successfully") + action, ChatFormatting.GREEN);
         } else {
-            sendFeedback(Log.translate("cracker.already") + action, ChatFormatting.RED, false);
+            sendFeedback(Log.translate("cracker.already") + action, ChatFormatting.RED);
         }
         Config.save();
     }

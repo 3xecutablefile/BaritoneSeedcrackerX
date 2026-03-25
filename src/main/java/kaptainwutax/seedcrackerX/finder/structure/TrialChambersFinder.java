@@ -195,7 +195,7 @@ public class TrialChambersFinder extends Finder {
 
     @Override
     public List<BlockPos> findInChunk() {
-        Biome biome = this.world.getNoiseBiome((this.chunkPos.x << 2) + 2, 64, (this.chunkPos.z << 2) + 2).value();
+        Biome biome = this.world.getNoiseBiome((this.chunkPos.x() << 2) + 2, 64, (this.chunkPos.z() << 2) + 2).value();
         // TODO: replace with following once deep dark is implemented
         // if (!Features.TRIAL_CHAMBERS.isValidBiome(BiomeFixer.swap(biome))) return new ArrayList<>();
         if (Minecraft.getInstance().level.registryAccess().lookup(Registries.BIOME).get().getKey(biome).equals(Biomes.DEEP_DARK)) return new ArrayList<>();
@@ -208,7 +208,7 @@ public class TrialChambersFinder extends Finder {
             combinedResult.addAll(positions);
 
             positions.forEach(pos -> {
-                RegionStructure.Data<?> data = Features.TRIAL_CHAMBERS.at(this.chunkPos.x, this.chunkPos.z);
+                RegionStructure.Data<?> data = Features.TRIAL_CHAMBERS.at(this.chunkPos.x(), this.chunkPos.z());
 
                 if (SeedCracker.get().getDataStorage().addBaseData(data, DataAddedEvent.POKE_STRUCTURES)) {
                     this.cuboids.add(new Cuboid(pos, pieceFinder.getLayout(), ARGB.color(170, 84, 3)));

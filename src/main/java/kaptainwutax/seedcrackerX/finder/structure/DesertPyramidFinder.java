@@ -30,9 +30,9 @@ public class DesertPyramidFinder extends AbstractTempleFinder {
     public static List<Finder> create(Level world, ChunkPos chunkPos) {
         List<Finder> finders = new ArrayList<>();
         finders.add(new DesertPyramidFinder(world, chunkPos));
-        finders.add(new DesertPyramidFinder(world, new ChunkPos(chunkPos.x - 1, chunkPos.z)));
-        finders.add(new DesertPyramidFinder(world, new ChunkPos(chunkPos.x, chunkPos.z - 1)));
-        finders.add(new DesertPyramidFinder(world, new ChunkPos(chunkPos.x - 1, chunkPos.z - 1)));
+        finders.add(new DesertPyramidFinder(world, new ChunkPos(chunkPos.x() - 1, chunkPos.z())));
+        finders.add(new DesertPyramidFinder(world, new ChunkPos(chunkPos.x(), chunkPos.z() - 1)));
+        finders.add(new DesertPyramidFinder(world, new ChunkPos(chunkPos.x() - 1, chunkPos.z() - 1)));
         return finders;
     }
 
@@ -45,7 +45,7 @@ public class DesertPyramidFinder extends AbstractTempleFinder {
             combinedResult.addAll(positions);
 
             positions.forEach(pos -> {
-                RegionStructure.Data<?> data = Features.DESERT_PYRAMID.at(this.chunkPos.x, this.chunkPos.z);
+                RegionStructure.Data<?> data = Features.DESERT_PYRAMID.at(this.chunkPos.x(), this.chunkPos.z());
 
                 if (SeedCracker.get().getDataStorage().addBaseData(data, DataAddedEvent.POKE_LIFTING)) {
                     this.addRenderers(pieceFinder, pos, ARGB.color(255, 0, 255));

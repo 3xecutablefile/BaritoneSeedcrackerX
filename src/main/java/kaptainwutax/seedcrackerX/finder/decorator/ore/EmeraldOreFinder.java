@@ -43,7 +43,7 @@ public class EmeraldOreFinder extends BlockFinder {
 
     @Override
     public List<BlockPos> findInChunk() {
-        Biome biome = this.world.getNoiseBiome((this.chunkPos.x << 2) + 2, 0, (this.chunkPos.z << 2) + 2).value();
+        Biome biome = this.world.getNoiseBiome((this.chunkPos.x() << 2) + 2, 0, (this.chunkPos.z() << 2) + 2).value();
 
         List<BlockPos> result = super.findInChunk();
         if (result.isEmpty()) return result;

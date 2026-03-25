@@ -4,10 +4,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import kaptainwutax.seedcrackerX.config.Config;
 import kaptainwutax.seedcrackerX.render.Cuboid;
 import net.fabricmc.fabric.api.client.rendering.v1.RenderStateDataKey;
-import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderEvents;
 import net.minecraft.client.Camera;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.state.LevelRenderState;
+import net.minecraft.client.renderer.state.level.LevelRenderState;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import org.slf4j.Logger;
@@ -37,8 +37,8 @@ public class FinderQueue {
     }
 
     public static void registerEvents() {
-        WorldRenderEvents.END_EXTRACTION.register(worldExtractionContext -> FinderQueue.get().extractCuboids(worldExtractionContext.worldState(), worldExtractionContext.camera()));
-        WorldRenderEvents.END_MAIN.register(worldRenderContext -> FinderQueue.get().renderCuboids(worldRenderContext.consumers(), worldRenderContext.matrices(), worldRenderContext.worldState()));
+        LevelRenderEvents.END_EXTRACTION.register(levelExtractionContext -> FinderQueue.get().extractCuboids(levelExtractionContext.levelState(), levelExtractionContext.camera()));
+        LevelRenderEvents.END_MAIN.register(levelRenderContext -> FinderQueue.get().renderCuboids(levelRenderContext.bufferSource(), levelRenderContext.poseStack(), levelRenderContext.levelState()));
     }
 
     public static FinderQueue get() {

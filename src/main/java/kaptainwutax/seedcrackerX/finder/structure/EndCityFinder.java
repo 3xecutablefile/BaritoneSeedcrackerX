@@ -51,9 +51,9 @@ public class EndCityFinder extends Finder {
     public static List<Finder> create(Level world, ChunkPos chunkPos) {
         List<Finder> finders = new ArrayList<>();
         finders.add(new EndCityFinder(world, chunkPos));
-        finders.add(new EndCityFinder(world, new ChunkPos(chunkPos.x - 1, chunkPos.z)));
-        finders.add(new EndCityFinder(world, new ChunkPos(chunkPos.x, chunkPos.z - 1)));
-        finders.add(new EndCityFinder(world, new ChunkPos(chunkPos.x - 1, chunkPos.z - 1)));
+        finders.add(new EndCityFinder(world, new ChunkPos(chunkPos.x() - 1, chunkPos.z())));
+        finders.add(new EndCityFinder(world, new ChunkPos(chunkPos.x(), chunkPos.z() - 1)));
+        finders.add(new EndCityFinder(world, new ChunkPos(chunkPos.x() - 1, chunkPos.z() - 1)));
         return finders;
     }
 
@@ -88,7 +88,7 @@ public class EndCityFinder extends Finder {
 
     @Override
     public List<BlockPos> findInChunk() {
-        Biome biome = this.world.getNoiseBiome((this.chunkPos.x << 2) + 2, 64, (this.chunkPos.z << 2) + 2).value();
+        Biome biome = this.world.getNoiseBiome((this.chunkPos.x() << 2) + 2, 64, (this.chunkPos.z() << 2) + 2).value();
         if (!Features.END_CITY.isValidBiome(BiomeFixer.swap(biome))) return new ArrayList<>();
 
         Map<PieceFinder, List<BlockPos>> result = this.findInChunkPieces();
@@ -113,7 +113,7 @@ public class EndCityFinder extends Finder {
                         this.cuboids.add(new Cuboid(posFix, ARGB.color(153, 0, 153)));
                     }
                 } else {
-                    RegionStructure.Data<?> data = Features.END_CITY.at(this.chunkPos.x, this.chunkPos.z);
+                    RegionStructure.Data<?> data = Features.END_CITY.at(this.chunkPos.x(), this.chunkPos.z());
 
                     if (SeedCracker.get().getDataStorage().addBaseData(data, DataAddedEvent.POKE_STRUCTURES)) {
                         this.cuboids.add(new Cuboid(pos, pieceFinder.getLayout(), ARGB.color(153, 0, 153)));

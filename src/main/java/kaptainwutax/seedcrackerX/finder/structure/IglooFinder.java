@@ -55,7 +55,7 @@ public class IglooFinder extends Finder {
             combinedResult.addAll(positions);
 
             positions.forEach(pos -> {
-                RegionStructure.Data<?> data = Features.IGLOO.at(this.chunkPos.x, this.chunkPos.z);
+                RegionStructure.Data<?> data = Features.IGLOO.at(this.chunkPos.x(), this.chunkPos.z());
 
                 if (SeedCracker.get().getDataStorage().addBaseData(data, DataAddedEvent.POKE_LIFTING)) {
                     this.cuboids.add(new Cuboid(pos, pieceFinder.getLayout(), ARGB.color(176, 207, 252)));
@@ -116,7 +116,7 @@ public class IglooFinder extends Finder {
     public static List<Finder> create(Level world, ChunkPos chunkPos) {
         List<Finder> finders = new ArrayList<>();
         finders.add(new IglooFinder(world, chunkPos));
-        finders.add(new IglooFinder(world, new ChunkPos(chunkPos.x + 1, chunkPos.z)));
+        finders.add(new IglooFinder(world, new ChunkPos(chunkPos.x() + 1, chunkPos.z())));
         return finders;
     }
 
