@@ -39,6 +39,7 @@
   },
   "suggests": {
     "flamingo": "*",
-    "modmenu": "*"
+    "modmenu": "*",
+    "baritone": "*"
   }
 }

@@ -54,6 +54,9 @@ public class ConfigScreen {
         ConfigCategory settings = builder.getOrCreateCategory(Component.translatable("settings"));
 
         settings.addEntry(eb.startBooleanToggle(Component.translatable("settings.active"), config.active).setSaveConsumer(val -> config.active = val).build());
+        settings.addEntry(eb.startBooleanToggle(Component.translatable("settings.baritone.auto"), config.baritoneAutoEnabled).setSaveConsumer(val -> config.baritoneAutoEnabled = val).build());
+        settings.addEntry(eb.startBooleanToggle(Component.translatable("settings.baritone.stopOnSolved"), config.baritoneAutoStopOnSolved).setSaveConsumer(val -> config.baritoneAutoStopOnSolved = val).build());
+        settings.addEntry(eb.startBooleanToggle(Component.translatable("settings.baritone.preferFinderTargets"), config.baritonePreferFinderTargets).setSaveConsumer(val -> config.baritonePreferFinderTargets = val).build());
         settings.addEntry(eb.startBooleanToggle(Component.translatable("settings.database"), config.databaseSubmits)
                 .setSaveConsumer(val -> config.databaseSubmits = val).build());
         settings.addEntry(eb.startBooleanToggle(Component.translatable("settings.hideNameDatabase"), config.anonymusSubmits).setSaveConsumer(val -> config.anonymusSubmits = val).build());

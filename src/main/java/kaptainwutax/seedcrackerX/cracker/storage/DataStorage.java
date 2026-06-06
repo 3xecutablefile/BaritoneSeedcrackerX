@@ -11,6 +11,7 @@ import com.seedfinding.mcfeature.structure.Shipwreck;
 import com.seedfinding.mcfeature.structure.Structure;
 import com.seedfinding.mcfeature.structure.TriangularStructure;
 import com.seedfinding.mcfeature.structure.UniformStructure;
+import kaptainwutax.seedcrackerX.SeedCracker;
 import kaptainwutax.seedcrackerX.config.ConfigScreen;
 import kaptainwutax.seedcrackerX.cracker.BiomeData;
 import kaptainwutax.seedcrackerX.cracker.DataAddedEvent;
@@ -83,6 +84,7 @@ public class DataStorage {
             Minecraft.getInstance().setScreen(screen);
             openGui = false;
         }
+        SeedCracker.get().getAutoCrackController().tick();
         if (!this.timeMachine.isRunning) {
             this.baseSeedData.dump();
             this.biomeSeedData.dump();
