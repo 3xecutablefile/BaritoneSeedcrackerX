@@ -9,6 +9,7 @@ import kaptainwutax.seedcrackerX.command.FinderCommand;
 import kaptainwutax.seedcrackerX.command.GuiCommand;
 import kaptainwutax.seedcrackerX.command.RenderCommand;
 import kaptainwutax.seedcrackerX.command.VersionCommand;
+import kaptainwutax.seedcrackerX.command.BaritoneCommand;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class ClientCommands {
     public static VersionCommand VERSION;
     public static GuiCommand GUI;
     public static DatabaseCommand DATABASE;
+    public static BaritoneCommand BARITONE;
 
     static {
         COMMANDS.add(RENDER = new RenderCommand());
@@ -35,6 +37,7 @@ public class ClientCommands {
         COMMANDS.add(VERSION = new VersionCommand());
         COMMANDS.add(GUI = new GuiCommand());
         COMMANDS.add(DATABASE = new DatabaseCommand());
+        COMMANDS.add(BARITONE = new BaritoneCommand());
     }
 
     public static void registerCommands(CommandDispatcher<FabricClientCommandSource> dispatcher) {

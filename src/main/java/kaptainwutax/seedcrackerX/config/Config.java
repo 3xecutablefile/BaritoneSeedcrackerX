@@ -41,6 +41,9 @@ public class Config {
     public boolean active = true;
     public boolean debug = false;
     public boolean antiXrayBypass = true;
+    public boolean baritoneAutoEnabled = false;
+    public boolean baritoneAutoStopOnSolved = true;
+    public boolean baritonePreferFinderTargets = true;
     private MCVersion version = MCVersion.latest();
     public boolean databaseSubmits = false;
     public boolean anonymusSubmits = false;

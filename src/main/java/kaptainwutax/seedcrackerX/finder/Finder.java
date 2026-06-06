@@ -72,6 +72,10 @@ public abstract class Finder {
 
     public abstract List<BlockPos> findInChunk();
 
+    public List<BlockPos> getTargetPositions() {
+        return this.cuboids.stream().map(Cuboid::getCenterPos).toList();
+    }
+
     public boolean shouldRender() {
         DimensionType finderDim = this.world.dimensionType();
         DimensionType playerDim = mc.player.level().dimensionType();

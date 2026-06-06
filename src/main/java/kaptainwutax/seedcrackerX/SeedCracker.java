@@ -2,6 +2,7 @@ package kaptainwutax.seedcrackerX;
 
 import com.mojang.logging.LogUtils;
 import kaptainwutax.seedcrackerX.api.SeedCrackerAPI;
+import kaptainwutax.seedcrackerX.baritone.AutoCrackController;
 import kaptainwutax.seedcrackerX.config.Config;
 import kaptainwutax.seedcrackerX.cracker.storage.DataStorage;
 import kaptainwutax.seedcrackerX.finder.FinderQueue;
@@ -19,6 +20,7 @@ public class SeedCracker implements ModInitializer {
     public static final ArrayList<SeedCrackerAPI> entrypoints = new ArrayList<>();
     private static SeedCracker INSTANCE;
     private final DataStorage dataStorage = new DataStorage();
+    private final AutoCrackController autoCrackController = new AutoCrackController();
 
     public static SeedCracker get() {
         return INSTANCE;
@@ -43,8 +45,13 @@ public class SeedCracker implements ModInitializer {
         return this.dataStorage;
     }
 
+    public AutoCrackController getAutoCrackController() {
+        return this.autoCrackController;
+    }
+
     public void reset() {
         SeedCracker.get().getDataStorage().clear();
+        SeedCracker.get().getAutoCrackController().stopAutomation(true);
         FinderQueue.get().finderControl.deleteFinders();
     }
 }

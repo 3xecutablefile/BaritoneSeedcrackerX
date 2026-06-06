@@ -112,6 +112,8 @@ The mod may ask you to find additional structures after this.
 It's more likely to happen with fewer bits and structures of the same type.
 After reducing your structure seeds, the mod will brute force your world seed via dungeon positions or hashed seed.
 
+If you install Baritone, you can enable automatic movement with `/seedcracker baritone ON` to path to finder targets and keep exploring chunks.
+
 ### The Nether
 
 Fungus cracking don't work anymore, so there are no way to find nether seed using SeedcrackerX, however you can try to crack it yourself by using [Nether_Bedrock_Cracker](https://github.com/19MisterX98/Nether_Bedrock_Cracker)
@@ -164,6 +166,11 @@ If version of your mod is older than 2.13.1, use prefix
   - `/seedcracker database`
   
   Opens a [google sheet](https://docs.google.com/spreadsheets/d/1tuQiE-0leW88em9OHbZnH-RFNhVqgoHhIt9WQbeqqWw/edit?usp=sharing) that is maintained by the mod
+
+  ### Baritone Automation Command
+  - `/seedcracker baritone ON|OFF|status|stop`
+
+  Enables optional Baritone autopathing for cracking flow.
   
 ## Video Tutorials
 
